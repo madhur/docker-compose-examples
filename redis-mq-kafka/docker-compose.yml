@@ -69,15 +69,15 @@ services:
       - RABBITMQ_USERNAME=gwportal
       - RABBITMQ_PASSWORD=gwportal
 
-  kafka:
-    image: bitnami/kafka
-    volumes:
-      - ./kafka:/bitnami/kafka
-    ports:
-      - 9092:9092
-    environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=192.168.1.181
+  # kafka:
+  #   image: bitnami/kafka
+  #   volumes:
+  #     - ./kafka:/bitnami/kafka
+  #   ports:
+  #     - 9092:9092
+  #   environment:
+  #     - ALLOW_PLAINTEXT_LISTENER=yes
+  #     - KAFKA_CFG_ZOOKEEPER_CONNECT=192.168.1.252
 
   cassandra:
     image: cassandra:3.11.13
