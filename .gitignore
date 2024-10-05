@@ -3,4 +3,6 @@ redis-mq-kafka/kafka
 redis-mq-kafka/rabbitmq
 graphite-statsd-grafana/data
 rancher/rancher-data/
-
+mongodb/data3
+mongodb/data4
+elasticsearch/es_data

@@ -1,13 +1,13 @@
-version: '2'
+#version: '2'
 
 services:
-  grafana:
-    image: grafana/grafana:7.1.1
-    ports:
-      - 3000:3000
+  # grafana:
+  #   image: grafana/grafana:7.1.1
+  #   ports:
+  #     - 3000:3000
 
   grafana-latest:
-    image: grafana/grafana:9.5.1
+    image: grafana/grafana:11.0.1
     ports:
       - 4000:3000
     volumes:
@@ -19,7 +19,7 @@ services:
       - 81:80
       - 2003-2004:2003-2004
       - 2023-2024:2023-2024
-      - 192.168.1.252:8125:8125/udp
+      - 192.168.1.82:8125:8125/udp
       - 8126:8126
 
 volumes:

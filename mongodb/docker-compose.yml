@@ -1,0 +1,18 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo3:
+    image: mongo:3.0
+    volumes:
+      - ./data3:/data/db
+    ports:
+      - 27018:27017
+
+  mongo4:
+    image: mongo:4.0
+    volumes:
+      - ./data4:/data/db
+    ports:
+      - 27019:27017
