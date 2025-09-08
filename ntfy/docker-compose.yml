@@ -1,0 +1,21 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=Asia/Kolkata    # optional: set desired timezone
+    volumes:
+      - /var/cache/ntfy:/var/cache/ntfy
+      - /etc/ntfy:/etc/ntfy
+    ports:
+      - 8002:80
+    restart: unless-stopped
+    networks:
+      - proxy-network
+
+
+networks:
+  proxy-network:
+    external: true

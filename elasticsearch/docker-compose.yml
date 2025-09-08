@@ -2,7 +2,8 @@ version: "3.9"
 services:
   elasticsearch:
     #image: elasticsearch:8.2.2
-    image: elasticsearch:7.10.1
+    #image: elasticsearch:7.10.1
+    image: elasticsearch:9.0.2
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms1g -Xmx1g
@@ -17,7 +18,8 @@ services:
 
   kibana:
     #image: kibana:8.2.2
-    image: kibana:7.10.1
+    #image: kibana:7.10.1
+    image: kibana:9.0.2
     ports:
       - target: 5601
         published: 5601

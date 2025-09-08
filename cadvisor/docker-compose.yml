@@ -1,0 +1,23 @@
+services:
+  cadvisor:
+    image: 'gcr.io/cadvisor/cadvisor:latest'
+    container_name: 'cadvisor'
+    command:
+      - '-housekeeping_interval=10s'
+      - '-docker_only=true'
+    ports:
+      - '8080:8080'
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    restart: unless-stopped
+    networks:
+      - proxy-network
+
+
+networks:
+  proxy-network:
+    external: true

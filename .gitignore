@@ -1,8 +1,11 @@
-redis-mq-kafka/cassandra
-redis-mq-kafka/kafka
-redis-mq-kafka/rabbitmq
-graphite-statsd-grafana/data
-rancher/rancher-data/
-mongodb/data3
-mongodb/data4
-elasticsearch/es_data
+# Ignore everything
+*
+
+# Don't ignore directories
+!*/
+
+# Allow docker-compose.yml files recursively
+!**/docker-compose.yml
+
+# Don't ignore .gitignore itself
+!.gitignore
