@@ -4,6 +4,7 @@
 # Don't ignore directories
 !*/
 
+!README.md
 # Allow docker-compose.yml files recursively
 !**/docker-compose.yml
 !**/compose.yaml
