@@ -2,8 +2,8 @@ services:
   stirling-pdf:
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
     container_name: sterlingpdf
-    ports:
-      - '8081:8080'
+    # ports:
+    #   - '8081:8080'
     volumes:
       - ./StirlingPDF/trainingData:/usr/share/tessdata # Required for extra OCR languages
       - ./StirlingPDF/extraConfigs:/configs
@@ -15,6 +15,15 @@ services:
       - LANGS=en_GB
     networks:
       - proxy-network
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sterlingpdf.rule=Host(`pdf.desktop.madhur.co.in`)"
+      - "traefik.http.routers.sterlingpdf.entrypoints=web"
+      - "traefik.http.services.sterlingpdf.loadbalancer.server.port=8080"
+      - "traefik.docker.network=proxy-network"
+      - "traefik.http.routers.sterlingpdf.middlewares=vpn-whitelist"
+      - "traefik.http.middlewares.vpn-whitelist.ipwhitelist.sourcerange=10.42.42.0/24,192.168.1.0/24"
 
 
 networks:

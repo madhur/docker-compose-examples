@@ -1,6 +1,7 @@
 services:
   app:
     image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    container_name: 'nginxproxymanager'
     restart: unless-stopped
     ports:
       - '80:80'

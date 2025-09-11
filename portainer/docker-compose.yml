@@ -2,6 +2,7 @@ version: "3"
 services:
   portainer:
     image: portainer/portainer-ce:latest
+    container_name: 'portainer'
     ports:
       - 9443:9443
     volumes:

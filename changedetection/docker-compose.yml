@@ -2,12 +2,19 @@ services:
   changedetection:
     image: ghcr.io/dgtlmoon/changedetection.io
     container_name: changedetection
-    ports:
-      - "5000:5000"
+    # ports:
+    #   - "5000:5000"
     volumes:
       - ./data:/datastore
     restart: unless-stopped
-
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.changedetection.rule=Host(`cd.desktop.madhur.co.in`)"
+        - "traefik.http.routers.changedetection.entrypoints=web"
+        - "traefik.http.services.changedetection.loadbalancer.server.port=5000"
+        - "traefik.docker.network=proxy-network"
+        - "traefik.http.routers.changedetection.middlewares=vpn-whitelist"
+        - "traefik.http.middlewares.vpn-whitelist.ipwhitelist.sourcerange=10.42.42.0/24,192.168.1.0/24"
     networks:
       - proxy-network
 

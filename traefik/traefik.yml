@@ -1,0 +1,38 @@
+api:
+  dashboard: true
+  insecure: true
+  debug: false
+#log:
+#  level: DEBUG  # Add this line
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  metrics:
+    address: ":8082"
+serversTransport:
+  insecureSkipVerify: true
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+    network: proxy-network
+certificatesResolvers:
+  letencrypt:
+    acme:
+      email: ahuja.madhur@gmail.com
+      storage: /letsencrypt/acme.json
+      caServer: https://acme-v02.api.letsencrypt.org/directory # prod (default)
+      # caServer: https://acme-staging-v02.api.letsencrypt.org/directory # staging
+      # httpChallenge:
+      #   entryPoint: web
+      tlschallenge: {}
+metrics:
+  prometheus:
+    entryPoint: metrics
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0

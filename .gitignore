@@ -6,6 +6,8 @@
 
 # Allow docker-compose.yml files recursively
 !**/docker-compose.yml
+!**/compose.yaml
+!**/traefik.yml
 
 # Don't ignore .gitignore itself
 !.gitignore

@@ -1,6 +1,7 @@
 services:
   watchtower:
     image: containrrr/watchtower
+    container_name: 'watchtower'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -8,6 +9,7 @@ services:
       - WATCHTOWER_NOTIFICATION_URL=ntfy://ntfy.madhur.co.in/systemd?title=WatchtowerUpdates
     networks:
       - proxy-network
+    restart: unless-stopped
 
 networks:
   proxy-network:
