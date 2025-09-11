@@ -13,42 +13,42 @@ This repository contains Docker Compose configurations for various self-hosted s
 ## 📋 Services
 
 ### Core Infrastructure
-- **[Traefik](traefik/)** - Reverse proxy with automatic SSL certificates
-- **[Portainer](portainer/)** - Docker container management UI
-- **[Nginx Proxy Manager](nginxproxymanager/)** - Alternative reverse proxy solution
-- **[Watchtower](watchtower/)** - Automatic Docker container updates
-- **[WireGuard Easy](wg-easy/)** - VPN server for remote access
+- **[Traefik](traefik/)** - Reverse proxy with automatic SSL certificates | [GitHub](https://github.com/traefik/traefik)
+- **[Portainer](portainer/)** - Docker container management UI | [GitHub](https://github.com/portainer/portainer)
+- **[Nginx Proxy Manager](nginxproxymanager/)** - Alternative reverse proxy solution | [GitHub](https://github.com/NginxProxyManager/nginx-proxy-manager)
+- **[Watchtower](watchtower/)** - Automatic Docker container updates | [GitHub](https://github.com/containrrr/watchtower)
+- **[WireGuard Easy](wg-easy/)** - VPN server for remote access | [GitHub](https://github.com/wg-easy/wg-easy)
 
 ### Media & Content Management
-- **[Immich](immich/)** - Self-hosted photo and video backup solution
-- **[PhotoPrism](photoprism/)** - AI-powered photo management
-- **[Paperless-ngx](paperless/)** - Document management system
+- **[Immich](immich/)** - Self-hosted photo and video backup solution | [GitHub](https://github.com/immich-app/immich)
+- **[PhotoPrism](photoprism/)** - AI-powered photo management | [GitHub](https://github.com/photoprism/photoprism)
+- **[Paperless-ngx](paperless/)** - Document management system | [GitHub](https://github.com/paperless-ngx/paperless-ngx)
 
 ### Security & Authentication
-- **[Vaultwarden](vaultwarden/)** - Self-hosted Bitwarden password manager
-- **[LLDAP](lldap/)** - Lightweight LDAP server
+- **[Vaultwarden](vaultwarden/)** - Self-hosted Bitwarden password manager | [GitHub](https://github.com/dani-garcia/vaultwarden)
+- **[LLDAP](lldap/)** - Lightweight LDAP server | [GitHub](https://github.com/lldap/lldap)
 
 ### Development & DevOps
-- **[Jenkins](jenkins/)** - CI/CD automation server
-- **[Nexus](nexus/)** - Artifact repository manager
-- **[Portainer](portainer/)** - Container orchestration UI
+- **[Jenkins](jenkins/)** - CI/CD automation server | [GitHub](https://github.com/jenkinsci/jenkins)
+- **[Nexus](nexus/)** - Artifact repository manager | [GitHub](https://github.com/sonatype/nexus-public)
+- **[Portainer](portainer/)** - Container orchestration UI | [GitHub](https://github.com/portainer/portainer)
 
 ### Databases & Storage
-- **[MongoDB](mongodb/)** - NoSQL database
-- **[Redis Cluster](redis-cluster/)** - In-memory data store cluster
-- **[Redis MQ Kafka](redis-mq-kafka/)** - Message queue with Kafka
-- **[DynamoDB](dynamodb/)** - NoSQL database (local instance)
-- **[Scylla](scylla/)** - High-performance NoSQL database
-- **[Elasticsearch](elasticsearch/)** - Search and analytics engine
+- **[MongoDB](mongodb/)** - NoSQL database | [GitHub](https://github.com/mongodb/mongo)
+- **[Redis Cluster](redis-cluster/)** - In-memory data store cluster | [GitHub](https://github.com/redis/redis)
+- **[Redis MQ Kafka](redis-mq-kafka/)** - Message queue with Kafka | [GitHub](https://github.com/apache/kafka)
+- **[DynamoDB](dynamodb/)** - NoSQL database (local instance) | [GitHub](https://github.com/aws/aws-sdk-java)
+- **[Scylla](scylla/)** - High-performance NoSQL database | [GitHub](https://github.com/scylladb/scylla)
+- **[Elasticsearch](elasticsearch/)** - Search and analytics engine | [GitHub](https://github.com/elastic/elasticsearch)
 
 ### Monitoring & Analytics
-- **[cAdvisor](cadvisor/)** - Container resource monitoring
-- **[Graphite + StatsD + Grafana](graphite-statsd-grafana/)** - Metrics collection and visualization
-- **[Change Detection](changedetection/)** - Website change monitoring
+- **[cAdvisor](cadvisor/)** - Container resource monitoring | [GitHub](https://github.com/google/cadvisor)
+- **[Graphite + StatsD + Grafana](graphite-statsd-grafana/)** - Metrics collection and visualization | [GitHub](https://github.com/grafana/grafana) | [Graphite](https://github.com/graphite-project/graphite-web)
+- **[Change Detection](changedetection/)** - Website change monitoring | [GitHub](https://github.com/dgtlmoon/changedetection.io)
 
 ### Utilities
-- **[Ntfy](ntfy/)** - Push notifications service
-- **[Sterling PDF](sterlingpdf/)** - PDF processing service
+- **[Ntfy](ntfy/)** - Push notifications service | [GitHub](https://github.com/binwiederhier/ntfy)
+- **[Sterling PDF](sterlingpdf/)** - PDF processing service | [GitHub](https://github.com/sterlingpdf/sterling-pdf)
 
 ## 🚀 Quick Start
 
