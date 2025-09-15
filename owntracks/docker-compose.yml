@@ -1,0 +1,79 @@
+services:
+  owntracks-recorder:
+    container_name: owntracks-recorder
+    image: owntracks/recorder
+    networks:
+      - proxy-network
+    # ports:
+    #   - 8083:8083
+    environment:
+      OTR_HOST: mosquitto
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./owntracks-recorder/config:/config
+      - ./owntracks-recorder/store:/store
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.owntracks.rule=Host(`owntracks.desktop.madhur.co.in`)"
+      - "traefik.http.routers.owntracks.entrypoints=web"
+      - "traefik.http.services.owntracks.loadbalancer.server.port=8083"
+      - "traefik.docker.network=proxy-network"
+
+
+  owntracks-frontend:
+    image: owntracks/frontend
+    container_name: owntracks-frontend
+    networks:
+      - proxy-network
+    # ports:
+    #   - "80:80" # Map host port 80 to container port 80 (or change if needed)
+    environment:
+      - SERVER_HOST=owntracks-recorder # Replace with the hostname/IP of your OwnTracks Recorder
+      - SERVER_PORT=8083      # Replace with the port of your OwnTracks Recorder
+      # - LISTEN_PORT=80        # Optional: Change the port Nginx listens on within the container (default is 80)
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.owntracks-web.rule=Host(`owntracks-web.desktop.madhur.co.in`)"
+      - "traefik.http.routers.owntracks-web.entrypoints=web"
+      - "traefik.http.services.owntracks-web.loadbalancer.server.port=80"
+      - "traefik.docker.network=proxy-network"
+
+  mosquitto:
+    image: eclipse-mosquitto
+    # ports:
+    #   - 1883:1883
+    #   - 8883:8883
+    networks:
+      - proxy-network
+    volumes:
+      - ./mosquitto-data:/mosquitto/data
+      - ./mosquitto-logs:/mosquitto/logs
+      - ./mosquitto-conf:/mosquitto/config
+    # Use the built-in example config to accept connections from otrecorder.
+    # Replace this config with your own to accept connections from mobile clients.
+    command: mosquitto -c /mosquitto-no-auth.conf
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy-network"
+       # MQTT TCP service
+      - "traefik.tcp.services.mqtt-tls.loadbalancer.server.port=1883"
+      - "traefik.tcp.routers.mqtt-tls.entrypoints=websecure"
+      - "traefik.tcp.routers.mqtt-tls.rule=HostSNI(`mqtt.desktop.madhur.co.in`)"
+      - "traefik.tcp.routers.mqtt-tls.service=mqtt-tls"
+      - "traefik.tcp.routers.mqtt-tls.tls=true"
+      - "traefik.tcp.routers.mqtt-tls.tls.certresolver=letencrypt"
+      #- "traefik.tcp.routers.mqtt-tcp.tls=false"
+      
+      # MQTT WebSocket service (if using WebSockets)
+      # - "traefik.tcp.services.mqtt-websocket.loadbalancer.server.port=9001"
+      # - "traefik.tcp.routers.mqtt-websocket.entrypoints=websecure"
+      # - "traefik.tcp.routers.mqtt-websocket.rule=HostSNI(`mqtt-ws.desktop.madhur.co.in`)"
+      # - "traefik.tcp.routers.mqtt-websocket.service=mqtt-websocket"
+      #- "traefik.tcp.routers.mqtt-websocket.tls=false"
+
+networks:
+  proxy-network:
+    external: true

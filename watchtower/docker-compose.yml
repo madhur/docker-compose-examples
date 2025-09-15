@@ -6,7 +6,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - WATCHTOWER_MONITOR_ONLY=true
-      - WATCHTOWER_NOTIFICATION_URL=ntfy://ntfy.madhur.co.in/systemd?title=WatchtowerUpdates
+      - WATCHTOWER_NOTIFICATION_URL=ntfy://ntfy:80/systemd?title=WatchtowerUpdates&scheme=http
     networks:
       - proxy-network
     restart: unless-stopped

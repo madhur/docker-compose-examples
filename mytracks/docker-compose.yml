@@ -1,0 +1,62 @@
+services:
+  location-sharing-frontend:
+    container_name: "location-sharing-frontend"
+    build:
+      context: /home/madhur/AndroidStudioProjects/live_location_share/build/web  # The directory containing the Dockerfile and other build context files
+      dockerfile: Dockerfile # The name of the Dockerfile within the context directory
+    networks:
+      - proxy-network
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mytracks-web.rule=Host(`mytracks-web.desktop.madhur.co.in`)"
+      - "traefik.http.routers.mytracks-web.entrypoints=websecure"
+      - "traefik.http.services.mytracks-web.loadbalancer.server.port=80"
+      - "traefik.http.routers.mytracks-web.tls.certresolver=letencrypt"
+      - "traefik.docker.network=proxy-network"
+
+
+  location-sharing-backend:
+    container_name: "location-sharing-backend"
+    build:
+      context: /home/madhur/gitpersonal/live-location-share-server  # The directory containing the Dockerfile and other build context files
+      dockerfile: Dockerfile # The name of the Dockerfile within the context directory
+    networks:
+      - proxy-network
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - REDIS_DB=0
+      - NODE_ENV=production
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mytracks.rule=Host(`mytracks.desktop.madhur.co.in`)"
+      - "traefik.http.routers.mytracks.entrypoints=websecure"
+      - "traefik.http.services.mytracks.loadbalancer.server.port=8083"
+      - "traefik.http.routers.mytracks.tls.certresolver=letencrypt"
+      - "traefik.docker.network=proxy-network"
+
+  redis:
+    image: redis:8.2.1-alpine
+    container_name: redis-server
+    restart: unless-stopped
+    networks:
+      - proxy-network
+    
+    # Expose Redis port
+    # ports:
+    #   - "6379:6379"
+    
+    # Mount volume for data persistence
+    volumes:
+      - ./redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    
+    # Use custom Redis configuration
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+networks:
+  proxy-network:
+    external: true
